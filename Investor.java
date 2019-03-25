@@ -39,6 +39,13 @@ public class Investor extends Exchange
         return exchange.returnAssets();
     }
     
+    public String returnAllAssets()
+    {
+        String print = "";
+        print += "Capital: $" + exchange.returnAssets() + ", Financial Capital: $" + assets + ".";
+        return print;
+    }
+    
     public void buyStock(int index, int number)
     {
         Stock stock = stocks.get(index);
@@ -59,5 +66,19 @@ public class Investor extends Exchange
         }
     }
     
+    public void nextDay()
+    {
+        exchange.newDay();
+    }
     
+    public String toString()
+    {
+        String print = "";
+        return print;
+    }
+    
+    public void printInfo()
+    {   
+        System.out.println("Capital: $" + exchange.returnAssets() + ", Financial Capital: $" + assets + ".");
+    }
 }

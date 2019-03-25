@@ -57,5 +57,12 @@ public class Exchange
         return total;
     }
     
-    
+    public void newDay()
+    {
+        for(int i = 0; i < numberOfStocks; i++)
+        {
+            stocks.get(i).randomize();
+            stocks.get(i).printInfo();
+        }
+    }
 }

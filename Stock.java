@@ -83,4 +83,11 @@ public class Stock
         print += "Name: " + name + ", Price: $" + price + ", Available: " + available + ", Owned: " + owned + ".";
         return print;
     }
+    
+    public void printInfo()
+    {
+        String print = "";
+        print += "Name: " + name + ", Price: $" + price + ", Available: " + available + ", Owned: " + owned + ".";
+        System.out.println(print);
+    }
 }
