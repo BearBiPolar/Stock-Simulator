@@ -1,151 +1,63 @@
-import java.io.*; 
-import java.util.*; 
+
 /**
  * Write a description of class Investor here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Investor
+public class Investor extends Exchange
 {
     // instance variables - replace the example below with your own
     private double assets;
-    private int numberOfStocks;
-    Stock stock;
     private String name;
-    ArrayList <Stock> stocks = new ArrayList<Stock>();
-    
+    private Exchange exchange;
     /**
      * Constructor for objects of class Investor
      */
     public Investor()
     {
         // initialise instance variables
+        name = "Elon Musk";
         assets = 1000;
-        numberOfStocks = 0;
-        stock = new Stock();
-        name = "Warren Buffett";
+        exchange = new Exchange();
     }
 
     /**
-     * Constructor for objects of class Investor
-     */
-    public Investor(double assets)
-    {
-        // initialise instance variables
-        this.assets = assets;
-        this.numberOfStocks = 0;
-        stock = new Stock();
-        name = "Warren Buffett";
-    }
-    
-
-    /**
-     * Constructor for objects of class Investor
-     */
-    public Investor(double assets, double stockPrice)
-    {
-        // initialise instance variables
-        this.assets = assets;
-        this.numberOfStocks = 0;
-        stock = new Stock(stockPrice);
-        name = "Warren Buffett";
-    }
-    
-    public Investor(double assets, double stockPrice, String name)
-    {
-        // initialise instance variables
-        this.assets = assets;
-        this.numberOfStocks = 0;
-        stock = new Stock(stockPrice);
-        this.name = name;
-    }
-
-    public String returnName()
-    {
-        return name;
-    }
-    
-    /**
-     * Returns the total of assets possesed in dollars.
+     * An example of a method - replace this comment with your own
      *
-     * @return    the total of assets possesed
+     * @param  y  a sample parameter for a method
+     * @return    the sum of x and y
      */
-    public double returnAssets()
+    public double returnFinancialCapital()
     {
         // put your code here
-        return assets + numberOfStocks*stock.returnPrice();
-    }
-
-    /**
-     * Buy the number of stocks specified by the user.
-     *
-     * @param  number the number of stocks the user wishes to buy
-     */
-    public void buyStocks(int number)
-    {
-        if(assets >= number*stock.returnPrice())
-        {
-            this.numberOfStocks = numberOfStocks + number;
-            this.assets = this.assets - number*stock.returnPrice();
-        }
-        else
-        {
-            System.out.println("Sorry, you need $" + (number*stock.returnPrice() - assets) + " more to complete the transaction.");
-        }
-        getInfo();
-    }
-
-    /**
-     * Sells the number of stocks specified by the user.
-     *
-     * @param  number the number of stocks the user wishes to sell
-     */
-    public void sellStocks(int number)
-    {
-        if(numberOfStocks >= number)
-        {
-            this.numberOfStocks = numberOfStocks - number;
-            this.assets = this.assets + number*stock.returnPrice();
-        }
-        else
-        {
-            System.out.println("Sorry, you do not own enough stocks to complete the transaction.");
-        }
-    }
-
-    
-
-    /**
-     * Provides information on the user's financial portfolio.
-     */
-    public void getInfo()
-    {
-        System.out.println("");
-        System.out.println("Your total net worth is $" + round(returnAssets()) + ".");
-        System.out.println("You have " + numberOfStocks + " stocks valued at $" + round(stock.returnPrice()) + ".");
-        System.out.println("You possess $" + assets + " in financial capital and $" + round(numberOfStocks*stock.returnPrice()) + " in stocks.");
-    }
-
-    private void addStocks(int number)
-    {
-        this.numberOfStocks = numberOfStocks + number;
-    }
-
-    private void addAssets(double assets)
-    {
-        this.assets = this.assets + assets;
+        return assets;
     }
     
-    private void removeAssets(double assets)
+    public double returnCapital()
     {
-        this.assets = this.assets - assets;
+        return exchange.returnAssets();
     }
     
-    private double round(double number)
+    public void buyStock(int index, int number)
     {
-        number = Math.round(number * 100);
-        number = number/100;
-        return number;
+        Stock stock = stocks.get(index);
+        if(assets >= stock.returnPrice()*number)
+        {
+            exchange.buyStock(index,number);
+            assets = assets - stock.returnPrice()*number;
+        }
     }
+    
+    public void sellStock(int index, int number)
+    {
+        Stock stock = stocks.get(index);
+        if(stock.returnOwned() >= number)
+        {
+            exchange.sellStock(index,number);
+            assets = assets + stock.returnPrice()*number;
+        }
+    }
+    
+    
 }

@@ -9,41 +9,30 @@ public class Stock
 {
     // instance variables - replace the example below with your own
     private double price;
-    private int day;
     private String name;
+    private int available;
+    private int owned;
+    private int volatility;
     double amountOfChange;
     double change;
-    int volatility;
-    int available;
-    int owned;
-
+    /**
+     * Constructor for objects of class Stock
+     */
     public Stock()
     {
-        this.price = 100;
-        this.day = 0;
-        this.name = "AMZN";
+        // initialise instance variables
+        price = 100;
+        name = "AMZN";
+        available = 10;
+        owned = 0;
     }
 
-    /**
-     * Constructor for objects of class Stock
-     */
-    public Stock(double price)
+    public Stock(int available, String name, double price)
     {
-        // initialise instance variables
         this.price = price;
-        this.day = 0;
-        this.name = "AMZN";
-    }
-
-    /**
-     * Constructor for objects of class Stock
-     */
-    public Stock(double price, String name)
-    {
-        // initialise instance variables
-        this.price = price;
-        this.day = 0;
+        this.available = available;
         this.name = name;
+        this.owned = 0;
     }
 
     /**
@@ -55,42 +44,43 @@ public class Stock
         amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+2);
         change = amountOfChange*price/100;
         price = price + change;
-        dailyNews();
-    }
-    
-    public void buyStock(int number)
-    {
-        
-    }
-    
-    /**
-     * Returns the price of this stock
-     * 
-     * @return    the price of this stock
-     */
-    public double returnPrice()
-    {
-        // put your code here
-        return this.price;
+        System.out.println(returnPrice());
     }
 
-    public void dailyNews()
+    /**
+     * An example of a method - replace this comment with your own
+     *
+     * @param  y  a sample parameter for a method
+     * @return    the sum of x and y
+     */
+    public void buyStock(int y)
     {
-        day++;
-        System.out.println("Today is your Day #" + day + " of stock trading. Here are the updates: ");
-        if(amountOfChange > 0)
-        {
-            System.out.println("Good news!");
-            System.out.println(name + " is up " + amountOfChange + "% at $" + returnPrice() + " from $" + (returnPrice() - change) + ".");
-        }
-        else if(amountOfChange < 0)
-        {
-            System.out.println("Bad news!");
-            System.out.println(name + " is down " + amountOfChange + "% at $" + returnPrice() + " from $" + (returnPrice() - change) + ".");
-        }
-        else
-        {
-            System.out.println(name + " is constant at $" + returnPrice() + ".");
-        }
+        // put your code here
+        owned = owned + y;
+        available = available - y;
+    }
+
+    public void sellStock(int y)
+    {
+        // put your code here
+        owned = owned - y;
+        available = available + y;
+    }
+    
+    public int returnOwned()
+    {
+        return owned;
+    }
+
+    public double returnPrice()
+    {
+        return price;
+    }
+
+    public String toString()
+    {
+        String print = "";
+        print += "Name: " + name + ", Price: $" + price + ", Available: " + available + ", Owned: " + owned + ".";
+        return print;
     }
 }
