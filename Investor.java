@@ -1,4 +1,5 @@
-
+import java.io.*; 
+import java.util.*; 
 /**
  * Write a description of class Investor here.
  *
@@ -12,6 +13,7 @@ public class Investor
     private int numberOfStocks;
     Stock stock;
     private String name;
+    ArrayList <Stock> stocks = new ArrayList<Stock>();
     
     /**
      * Constructor for objects of class Investor
@@ -91,6 +93,7 @@ public class Investor
         {
             System.out.println("Sorry, you need $" + (number*stock.returnPrice() - assets) + " more to complete the transaction.");
         }
+        getInfo();
     }
 
     /**
@@ -111,22 +114,12 @@ public class Investor
         }
     }
 
-    /**
-     * Passes the day and thereby allowing the stock price to fluctuate.
-     *
-     */
-    public void passDay()
-    {
-        System.out.println("");
-        System.out.println("Good morning, " + returnName() + "!");
-        stock.randomize();
-        forInfo();
-    }
+    
 
     /**
      * Provides information on the user's financial portfolio.
      */
-    public void forInfo()
+    public void getInfo()
     {
         System.out.println("");
         System.out.println("Your total net worth is $" + round(returnAssets()) + ".");
@@ -144,7 +137,12 @@ public class Investor
         this.assets = this.assets + assets;
     }
     
-    public double round(double number)
+    private void removeAssets(double assets)
+    {
+        this.assets = this.assets - assets;
+    }
+    
+    private double round(double number)
     {
         number = Math.round(number * 100);
         number = number/100;

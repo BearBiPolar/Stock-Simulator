@@ -14,6 +14,8 @@ public class Stock
     double amountOfChange;
     double change;
     int volatility;
+    int available;
+    int owned;
 
     public Stock()
     {
@@ -49,13 +51,18 @@ public class Stock
      */
     public void randomize()
     {
-        volatility = 10;
-        amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+5);
+        volatility = 5;
+        amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+2);
         change = amountOfChange*price/100;
         price = price + change;
         dailyNews();
     }
-
+    
+    public void buyStock(int number)
+    {
+        
+    }
+    
     /**
      * Returns the price of this stock
      * 
