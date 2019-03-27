@@ -15,6 +15,8 @@ public class Stock
     private int volatility;
     double amountOfChange;
     double change;
+    int index;
+    
     /**
      * Constructor for objects of class Stock
      */
@@ -27,10 +29,11 @@ public class Stock
         owned = 0;
     }
 
-    public Stock(int available, String name, double price)
+    public Stock(int available, int index, String name, double price)
     {
         this.price = price;
         this.available = available;
+        this.index = index;
         this.name = name;
         this.owned = 0;
     }
@@ -40,12 +43,25 @@ public class Stock
      */
     public void randomize()
     {
-        volatility = 5;
-        amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+2);
-        change = amountOfChange*price/100;
+        volatility = 50;
+        amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+10);
+        change = amountOfChange*price/1000;
         price = price + change;
-        System.out.println(returnPrice());
     }
+    
+    /**
+     * Fluctuates the stock price by a precentage of its previous price according to the business cycle.
+     * 
+     * @param businessCycle the business cycle of the stock market; 0 for full employment; -100 for recession; 100 for boom;
+     */
+    public void randomize(int businessCycle)
+    {
+        volatility = 50;
+        amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+businessCycle);
+        change = amountOfChange*price/1000;
+        price = price + change;
+    }
+
 
     /**
      * An example of a method - replace this comment with your own
@@ -74,7 +90,17 @@ public class Stock
 
     public double returnPrice()
     {
-        return price;
+        return round(price);
+    }
+    
+    public double returnChange()
+    {
+        return round(change);
+    }
+    
+    public double returnPercentageChange()
+    {
+        return round(amountOfChange);
     }
 
     public String toString()
@@ -87,7 +113,31 @@ public class Stock
     public void printInfo()
     {
         String print = "";
-        print += "Name: " + name + ", Price: $" + price + ", Available: " + available + ", Owned: " + owned + ".";
+        print += "Name: " + name + ", Price: $" + price + ", Change: $" + change + ", Index: " + index + ", Available: " + available + ", Owned: " + owned + ".";
         System.out.println(print);
+    }
+    
+    public void printChange()
+    {
+        if(amountOfChange > 0)
+        {
+            System.out.println(name + " is up " + returnPercentageChange() + "% at $" + returnPrice() + " from $" + (returnPrice() - returnChange()));
+        }
+        else if(amountOfChange < 0)
+        {
+            System.out.println(name + " is down " + returnPercentageChange() + "% at $" + returnPrice() + " from $" + (returnPrice() - returnChange()));
+        }
+        else
+        {
+            System.out.println(name + " is constant at $" + returnPrice());
+        }
+    }
+    
+    
+    private double round(double number)
+    {
+        number = Math.round(number * 100);
+        number = number/100;
+        return number;
     }
 }

@@ -11,6 +11,7 @@ public class Investor extends Exchange
     private double assets;
     private String name;
     private Exchange exchange;
+    private double previousAssets;
     /**
      * Constructor for objects of class Investor
      */

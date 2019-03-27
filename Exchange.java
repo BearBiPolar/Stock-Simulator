@@ -12,7 +12,10 @@ public class Exchange
     private String[] names = {"AAPL", "AMZN", "JD", "ROKU", "SIRI"};
     private double[] prices = {188.74, 1778.37, 28.39, 66.75, 5.74};
     private int numberOfStocks = 5;
+    private int businessCycle = 10;
+    private int day = 0;
     ArrayList <Stock> stocks = new ArrayList<Stock>();
+    
     
     /**
      * Constructor for objects of class Exchange
@@ -22,7 +25,7 @@ public class Exchange
         // initialise instance variables
         for(int i = 0; i < numberOfStocks; i++)
         {
-            Stock stock = new Stock(available[i], names[i], prices[i]);
+            Stock stock = new Stock(available[i], i, names[i], prices[i]);
             stocks.add(stock);
         }
     }
@@ -62,7 +65,41 @@ public class Exchange
         for(int i = 0; i < numberOfStocks; i++)
         {
             stocks.get(i).randomize();
+        }
+        news();
+    }
+    
+    public void newDay(int businessCycle)
+    {
+        for(int i = 0; i < numberOfStocks; i++)
+        {
+            stocks.get(i).randomize(businessCycle);
             stocks.get(i).printInfo();
         }
+    }
+    
+    public void news()
+    {
+        day++;
+        System.out.println("");
+        System.out.println("Today is your Day #" + day + " of stock trading. Here are the updates: ");
+        
+        System.out.println("The Stock Market net % change is: " + returnOverview() + "%.");
+        System.out.println("Here are the updates: ");
+        System.out.println("");
+        for(int i = 0; i < numberOfStocks; i++)
+        {
+            stocks.get(i).printChange();
+        }
+    }
+    
+    public double returnOverview()
+    {
+        double total = 0;
+        for(int i = 0; i < numberOfStocks; i++)
+        {
+            total += stocks.get(i).returnPercentageChange();
+        }
+        return total/numberOfStocks;
     }
 }
