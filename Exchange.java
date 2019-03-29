@@ -62,6 +62,7 @@ public class Exchange
     
     public void newDay()
     {
+        day++;
         for(int i = 0; i < numberOfStocks; i++)
         {
             stocks.get(i).randomize();
@@ -71,6 +72,7 @@ public class Exchange
     
     public void newDay(int businessCycle)
     {
+        day++;
         for(int i = 0; i < numberOfStocks; i++)
         {
             stocks.get(i).randomize(businessCycle);
@@ -80,10 +82,9 @@ public class Exchange
     
     public void news()
     {
-        day++;
         System.out.println("");
-        System.out.println("Today is your Day #" + day + " of stock trading. Here are the updates: ");
-        
+        System.out.println("Today is your Day #" + day + " of stock trading!");
+        System.out.println("");
         System.out.println("The Stock Market net % change is: " + returnOverview() + "%.");
         System.out.println("Here are the updates: ");
         System.out.println("");
@@ -91,6 +92,20 @@ public class Exchange
         {
             stocks.get(i).printChange();
         }
+        returnAssetOverview();
+    }
+    
+    public void returnAssetOverview()
+    {
+        System.out.println("");
+        for(int i = 0; i < numberOfStocks; i++)
+        {
+            Stock stock = stocks.get(i);
+            System.out.println("You own " + stock.returnOwned() + " stocks of " + stock.returnName() + " valued at $" + stock.returnPrice() + "; valued at $" + stock.returnPrice()*stock.returnOwned());
+            
+        }
+        System.out.println("Total Investment Value: $" + returnAssets());
+        System.out.println("Total Market Value: $" + returnAssets());
     }
     
     public double returnOverview()

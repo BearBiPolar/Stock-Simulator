@@ -93,6 +93,11 @@ public class Stock
         return round(price);
     }
     
+    public String returnName() 
+    {
+        return name;
+    }
+    
     public double returnChange()
     {
         return round(change);
@@ -100,7 +105,7 @@ public class Stock
     
     public double returnPercentageChange()
     {
-        return round(amountOfChange);
+        return round(amountOfChange/10);
     }
 
     public String toString()
@@ -121,11 +126,11 @@ public class Stock
     {
         if(amountOfChange > 0)
         {
-            System.out.println(name + " is up " + returnPercentageChange() + "% at $" + returnPrice() + " from $" + (returnPrice() - returnChange()));
+            System.out.println(name + " is up " + returnPercentageChange() + "% at $" + returnPrice() + " from $" + round(returnPrice() - returnChange()));
         }
         else if(amountOfChange < 0)
         {
-            System.out.println(name + " is down " + returnPercentageChange() + "% at $" + returnPrice() + " from $" + (returnPrice() - returnChange()));
+            System.out.println(name + " is down " + returnPercentageChange() + "% at $" + returnPrice() + " from $" + round(returnPrice() - returnChange()));
         }
         else
         {
