@@ -13,7 +13,7 @@ public class Exchange
     private double[] prices = {188.74, 1778.37, 28.39, 66.75, 5.74};
     private int numberOfStocks = 5;
     private int businessCycle = 10;
-    private int day = 0;
+    private int day = 1;
     ArrayList <Stock> stocks = new ArrayList<Stock>();
     
     
@@ -86,8 +86,8 @@ public class Exchange
         System.out.println("Today is your Day #" + day + " of stock trading!");
         System.out.println("");
         System.out.println("The Stock Market net % change is: " + returnOverview() + "%.");
-        System.out.println("Here are the updates: ");
         System.out.println("");
+        System.out.println("Here are the updates: ");
         for(int i = 0; i < numberOfStocks; i++)
         {
             stocks.get(i).printChange();
@@ -95,9 +95,10 @@ public class Exchange
         returnAssetOverview();
     }
     
-    public void returnAssetOverview()
+    private void returnAssetOverview()
     {
         System.out.println("");
+        System.out.println("Portfolio:");
         for(int i = 0; i < numberOfStocks; i++)
         {
             Stock stock = stocks.get(i);
@@ -108,13 +109,14 @@ public class Exchange
         System.out.println("Total Market Value: $" + returnAssets());
     }
     
-    public double returnOverview()
+    private double returnOverview()
     {
         double total = 0;
         for(int i = 0; i < numberOfStocks; i++)
         {
             total += stocks.get(i).returnPercentageChange();
         }
-        return total/numberOfStocks;
+        int percent = (int)total*100/numberOfStocks;
+        return percent/100;
     }
 }
