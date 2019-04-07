@@ -1,4 +1,5 @@
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.*;
 /**
  * Write a description of class Stock here.
  *
@@ -16,6 +17,7 @@ public class Stock
     double amountOfChange;
     double change;
     int index;
+    ArrayList<Double> priceHistory = new ArrayList<Double>();
     
     /**
      * Constructor for objects of class Stock
@@ -27,6 +29,7 @@ public class Stock
         name = "AMZN";
         available = 10;
         owned = 0;
+        priceHistory.add(price);
     }
 
     public Stock(int available, int index, String name, double price)
@@ -36,6 +39,7 @@ public class Stock
         this.index = index;
         this.name = name;
         this.owned = 0;
+        priceHistory.add(price);
     }
 
     /**
@@ -47,6 +51,19 @@ public class Stock
         amountOfChange = (double)ThreadLocalRandom.current().nextInt(-volatility, volatility+10);
         change = amountOfChange*price/1000;
         price = price + change;
+        priceHistory.add(price);
+        if(priceHistory.size() > 100)
+        {
+            priceHistory.remove(0);
+        }
+    }
+    
+    public void printPriceHistory()
+    {
+        for(int i = 0; i < priceHistory.size(); i++)
+        {
+            System.out.println(priceHistory.get(i));
+        }
     }
     
     /**
@@ -62,7 +79,9 @@ public class Stock
         price = price + change;
     }
 
-
+    
+    
+    
     /**
      * An example of a method - replace this comment with your own
      *
@@ -139,7 +158,7 @@ public class Stock
     }
     
     
-    private double round(double number)
+    public double round(double number)
     {
         number = Math.round(number * 100);
         number = number/100;

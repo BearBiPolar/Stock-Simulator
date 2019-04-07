@@ -5,7 +5,7 @@ import java.util.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Exchange
+public class Exchange extends Stock
 {
     // instance variables - replace the example below with your own
     private int[] available = {10000, 1000, 100, 10, 1};
@@ -57,7 +57,7 @@ public class Exchange
             Stock stock = stocks.get(i);
             total += stock.returnOwned() * stock.returnPrice();
         }
-        return total;
+        return round(total);
     }
     
     public void newDay()
