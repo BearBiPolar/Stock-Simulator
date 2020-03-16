@@ -24,7 +24,7 @@ public class Investor extends Exchange
     }
 
     /**
-     * An example of a method - replace this comment with your own
+     * Return the financial capital available.
      *
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
