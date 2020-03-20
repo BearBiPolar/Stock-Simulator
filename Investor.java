@@ -12,13 +12,14 @@ public class Investor extends Exchange
     private String name;
     private Exchange exchange;
     private double previousAssets;
+    
     /**
      * Constructor for objects of class Investor
      */
     public Investor()
     {
         // initialise instance variables
-        name = "Elon Musk";
+        name = "Bob";
         assets = 1000;
         exchange = new Exchange();
     }
