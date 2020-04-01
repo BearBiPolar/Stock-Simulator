@@ -5,7 +5,7 @@ all he/she needs to know. The comments should usually include at least:
 ------------------------------------------------------------------------
 
 PROJECT TITLE: Stock Simulator
-PURPOSE OF PROJECT:
+PURPOSE OF PROJECT: To simulate the stock market.
 VERSION or DATE:
 HOW TO START THIS PROJECT:
 AUTHORS:
