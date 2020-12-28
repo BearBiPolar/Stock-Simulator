@@ -82,7 +82,7 @@ public class Exchange extends Stock
     
     public int getNumberOfStocks()
     {
-         return numberOfStocks;
+         return numberOfStocks
     }
     
     public void news()
