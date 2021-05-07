@@ -8,5 +8,5 @@ PROJECT TITLE: Stock Simulator
 PURPOSE OF PROJECT: To simulate the stock market.
 VERSION or DATE:
 HOW TO START THIS PROJECT:
-AUTHORS:
+AUTHORS: William Wang
 USER INSTRUCTIONS: Create an instance of the class Exchange.
